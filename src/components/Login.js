@@ -4,7 +4,6 @@ import { auth } from '../firebase';
 import { setPersistence, browserLocalPersistence, signOut } from 'firebase/auth';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import Dashboard from './Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -46,22 +45,25 @@ export default function Login() {
                 .then((e) => {
                     alert("acount created")
                 })
-                .catch((error) => console.log(error)
+                .catch((error) => {
+                    console.log(error)
+                     alert(error.message)}
                 );
         }
         catch (error) {
             console.log(error);
+            alert(error.message)
         }
     }
 
 
     const handlesignin = async (e) => {
         // e.preventDefault();
-        alert(email, password)
+        alert(`${email} ${ password}`)
         await signInWithEmailAndPassword(auth, email, password).then((e) => {
             console.log(e.user.email);
             setPersistence(auth, browserLocalPersistence)
-            navigate('/dashboard');
+            navigate('/home');
 
         }).catch((error) => {
             console.log(error)
@@ -75,19 +77,18 @@ export default function Login() {
     }
     return (
         <div className='    form-container d-flex justify-content-center align-items-center  vh-100'>
-           
-            <Form className='col-12  col-sm-6 col-md-5 col-lg-4 col-xl-3 border border-4 border-primary  '>
+   <Form className='col-12  col-sm-6 col-md-5 col-lg-4 col-xl-3 border border-4 border-primary  '>
                 <h1 className='text-center m-3 text-primary'>Login</h1>
                 <Form.Group className="mb-3 ms-3 me-3" controlId="formBasicEmail">
                     
                     <Form.Label className='mt-3'>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" size="sm"  onChange={(e) => { setEmail(e.target.value) }} value={email} />
+                    <Form.Control type="email" placeholder="Enter email" size="sm"  onChange={(e) => { setEmail(e.target.value) }} value={email} required/>
 
                 </Form.Group>
 
                 <Form.Group className="mb-5 ms-3 me-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" size="sm"  onChange={(e) => { setPassword(e.target.value) }} value={password} />
+                    <Form.Control type="password" placeholder="Password" size="sm"  onChange={(e) => { setPassword(e.target.value) }} value={password} required />
                 </Form.Group>
                
               <div className='row g-0 ms-3 me-3'  >

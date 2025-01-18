@@ -27,6 +27,7 @@ signInWithPopup(auth, provider)
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
+    console.log('hi');
     // ...
   });
   

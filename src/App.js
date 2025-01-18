@@ -5,6 +5,12 @@ import { auth } from "./firebase";
 import { useEffect, useState } from "react";
 import Sample from "./components/Googlesignin";
 import image  from "./assests/logo192.png";
+import  Home  from "./components/Home";
+import piechart from "./components/Graph";
+import { PieChart } from "recharts";
+import Graph from "./components/Graph";
+
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [name , setname] = useState(null);
@@ -22,12 +28,15 @@ function App() {
 
   
   return (
+<div>
+
     <BrowserRouter>
+
 
       <Routes>
         <Route path="/" element={user? <Navigate to="/dashboard" /> :<Login />} />
-        <Route path="/login" element={user? <Navigate to="/dashboard" /> : <Login />} />
-
+        <Route path="/login" element={user? <Navigate to="/home" /> : <Login />} />
+        
         <Route
           path="/dashboard"
           element={
@@ -37,11 +46,14 @@ function App() {
           }
         />
         {/* Add the /sample route here */}
-          
+          <Route path="/Home" element={user? <Home></Home>:<Login></Login>} />
       </Routes>
     </BrowserRouter>
+    </div>
   );
 }
+
+
 
 function ProtectedRoute({ user, children ,loading}) {
   if(loading){
