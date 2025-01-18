@@ -6,11 +6,13 @@ import Sidebar from "./Sidebar";
 import Card from 'react-bootstrap/Card';
 import Graph from './Graph';
 import { useLocation } from 'react-router-dom';
+import axios from './axios';
 
 export default function Dashboard(props) {
   const location = useLocation();
   const { array } = location.state || { array: [] }; // Fallback to empty array
   const [savedArray, setSavedArray] = useState(array);
+  const [joke, setJoke] = useState(null);
 
   // Handle Sign-Out
   const handleSignOut = () => {
@@ -26,11 +28,22 @@ export default function Dashboard(props) {
     setSavedArray(localStorageArray); // Set array from localStorage if available
   }, []);
 
+
+   const handlejoke = async ()=>{
+ 
+    const response = await axios.get("/random_joke");
+    setJoke(response.data.setup + " " + response.data.punchline);
+    
+
+  }
+
   return (
     <div>
       <Sidebar />
 
       <Graph data={savedArray} /> {/* Pass array data to Graph */}
+
+
 
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={props.url} />
@@ -42,8 +55,12 @@ export default function Dashboard(props) {
           <Button variant="primary" onClick={handleSignOut}>
             Logout
           </Button>
+          <p>{joke}</p>
         </Card.Body>
       </Card>
+
+
+      <Button onClick={handlejoke}>joke</Button>
     </div>
   );
 }

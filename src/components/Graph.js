@@ -18,8 +18,8 @@ const Graph = ({data}) => {
     value: parseFloat(value), // Convert value to a number
   }));
   
-  console.log('Transformed Data for Graph:', chartData);
-  console.log('data');
+  // console.log('Transformed Data for Graph:', chartData);
+  // console.log('data');
   
 
 
