@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Graph from './Graph';
 import { useLocation } from 'react-router-dom';
 import axios from './axios';
+import Test1 from './Test1';
 
 export default function Dashboard(props) {
   const location = useLocation();
@@ -43,7 +44,7 @@ export default function Dashboard(props) {
 
       <Graph data={savedArray} /> {/* Pass array data to Graph */}
 
-
+<Test1></Test1>
 
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={props.url} />
